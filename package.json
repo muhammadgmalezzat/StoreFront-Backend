@@ -7,7 +7,7 @@
     "dev": "nodemon ./src/index.ts",
     "build": "tsc",
     "start": "npm run build && node dist/index.js",
-    "migration":"db-migrate up",
+    "migration": "db-migrate up",
     "format": "prettier --write ./src/*.ts",
     "lint": "eslint ./src/*.ts",
     "lint:fix": "eslint --fix ./src/*.ts",
@@ -25,6 +25,8 @@
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.30.0",
     "@typescript-eslint/parser": "^5.30.0",
+    "db-migrate": "^0.11.13",
+    "db-migrate-pg": "^1.2.2",
     "eslint": "^8.18.0",
     "helmet": "^5.1.0",
     "jasmine": "^4.2.1",
@@ -37,8 +39,6 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "db-migrate": "^0.11.13",
-    "db-migrate-pg": "^1.2.2",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-rate-limit": "^6.4.0",
