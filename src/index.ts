@@ -33,14 +33,14 @@ app.use('/api', routes);
 const port = 3000;
 
 //test database
-database.connect().then((clint) => {
-    return clint.query(`SELECT * FROM users ; `).then((res) => {
-        clint.release();
-        console.log(res.rows);
-    }).catch(error => {
-        console.log(error.stack);
-    })
-});
+// database.connect().then((clint) => {
+//     return clint.query(`SELECT * FROM users ; `).then((res) => {
+//         clint.release();
+//         console.log(res.rows);
+//     }).catch(error => {
+//         console.log(error.stack);
+//     })
+// });
 
 
 //add routing path (default endpoint)

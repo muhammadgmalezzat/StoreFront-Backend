@@ -10,7 +10,7 @@ export type Order = {
 
 class OrderModel {
     //create new order
-    async createUser(order: Order): Promise <Order> 
+    async createOrder(order: Order): Promise <Order> 
     {
         try { 
             //open connection to database
@@ -20,10 +20,11 @@ class OrderModel {
             const result = await connection.query(sql, [
                 order.user_id,
             ]);
+            const createorder= result.rows[0];
             //release connection
             connection.release();
             //return created user
-            return result.rows[0];
+            return createorder;
         } catch (error) {
             throw new Error(`unable to create order `);
         }

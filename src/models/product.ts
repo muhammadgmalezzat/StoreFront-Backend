@@ -11,6 +11,7 @@ export type Product = {
 //create product methodes
 
 class ProductModel {
+
     //creat product methode 
     async createProduct(product: Product): Promise<Product>
     {
@@ -24,15 +25,94 @@ class ProductModel {
                 product.price,
                 product.category
             ]);
+            const createproducts = result.rows[0];
             //release connection
             connection.release();
             //return result
-            return result.rows[0];
+            return createproducts;
         } catch (error) {
             throw new Error(`unable to create  (${product.name}): ${(error as Error).message}`);
         }
         
     }
+
+    //show all product
+
+    async getAllProducts(): Promise<Product[]> {
+    try {
+        const connection = await database.connect()
+      const sql = `SELECT * FROM products`
+        const result = await connection.query(sql)
+        connection.release()
+        return result.rows
+    } catch (error) {
+        throw new Error(`unable to get all products from the database`)
+    }
+    }
+
+
+    //get one 
+    async getOneProduct(id: number): Promise<Product> {
+    try {
+        const connection = await database.connect()
+        const sql = `SELECT  id, name, price ,category FROM products WHERE id=$1 `
+        const result = await connection.query(sql, [id])
+        connection.release()
+        return result.rows[0]
+    } catch (error) {
+        throw new Error(
+        `unable to get the  product from the database because ${
+            (error as Error).message}`)
+        }
+    }
+
+
+    //update one product
+    async updateOneProduct(product: Product): Promise<Product> {
+    try {
+        const connection = await database.connect()
+        const sql = `UPDATE products set (product_name, price) = 
+        ($1,$2) WHERE product_id=$3 RETURNING *`
+        const result = await connection.query(sql as string, [
+        product.product_name,
+        product.price,
+        product.product_id
+        ])
+        connection.release()
+        return result.rows[0]
+        } catch (error) {
+        throw new Error(
+        `unable to update the product from the database because ${
+            (error as Error).message
+        }`
+        )
+    }
+    }
+
+
+    //delete  product
+    async deleteOneProduct(product_id: string): Promise<Product> {
+    try {
+        const connection = await database.connect()
+        const sql = `DELETE FROM products WHERE product_id=($1) RETURNING product_id, product_name, price  `
+        const result = await connection.query(sql, [product_id])
+        connection.release()
+        return result.rows[0]
+        } catch (error) {
+        throw new Error(
+        `Can not delete the product baeause : ${
+            (error as Error).message
+        }`
+        )
+    }
+    }
+
+
+
+
+
+
+
 }
 
 export default ProductModel;
