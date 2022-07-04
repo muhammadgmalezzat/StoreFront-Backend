@@ -2,7 +2,7 @@ import database from '../database'
 
 //here user type 
 export type User = {
-    id?: number ;
+    id: number ;
     user_name: string;
     first_name: string;
     last_name: string;
@@ -18,9 +18,10 @@ class UserModel {
         try {
             //open connection to database
             const connection = await database.connect();
-            const sql = `INSERT INTO users (user_name, first_name, last_name, password) values ($1, $2, $3, $4) RETURNING *`;
+            const sql = `INSERT INTO users (id,user_name, first_name, last_name, password) values ($1, $2, $3, $4,$5) RETURNING *`;
             //run query
             const result = await connection.query(sql, [
+                user.id,
                 user.user_name,
                 user.first_name,
                 user.last_name,
@@ -50,11 +51,11 @@ class UserModel {
     }
 
     //one user
-    async getOneUser(user_name: string): Promise<User> {
+    async getOneUser(id: number): Promise<User> {
         try {
             const connection = await database.connect()
-            const sql = `SELECT  user_name, first_name, last_name FROM users WHERE user_name =$1`
-            const result = await connection.query(sql, [user_name])
+            const sql = `SELECT  id,user_name, first_name, last_name FROM users WHERE id =$1`
+            const result = await connection.query(sql, [id])
             connection.release()
             return result.rows[0];
         } catch (error) {

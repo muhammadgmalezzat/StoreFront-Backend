@@ -11,7 +11,5 @@ const clint = new Pool({
     password: config.password,
     max: 4,
 })
-// Pool.on('error' , (error: Error) => {
-//     console.error(error.message);
-// });
+
 export default clint;

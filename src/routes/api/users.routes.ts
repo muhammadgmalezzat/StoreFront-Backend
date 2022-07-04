@@ -36,9 +36,9 @@ routes.get('/', async (req: Request, res: Response, next: NextFunction) => {
 });
 
 //get one 
-routes.get('/:user_name', async (req: Request, res: Response, next: NextFunction) => {
+routes.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const result = await userModel.getOneUser(req.query.user_name as string)
+        const result = await userModel.getOneUser(req.query.id as unknown as number)
         res.json({
             data: { result },
             meesage: 'user retrieved successfully '

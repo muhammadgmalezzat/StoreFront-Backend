@@ -4,7 +4,7 @@ import { Router,Request, Response, NextFunction } from "express";
 const productModel = new ProductModel();
 const routes = Router();
 
-
+//create product
 routes.post('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
         
@@ -19,7 +19,7 @@ routes.post('/', async (req: Request, res: Response, next: NextFunction) => {
         next(error);
     }
 });
-
+//get all products
 routes.get('/', async (
     req: Request,
     res: Response,
@@ -35,6 +35,62 @@ routes.get('/', async (
         next(error)
     }
 });
+
+//get one product
+routes.get('/:id', async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const product = await productModel.getOneProduct(
+            req.query.id as unknown as number
+        )
+        res.json({
+            data: { ...product },
+            meesage: 'product retrieved successfully '
+        })
+    } catch (error) {
+        next(error)
+    }
+});
+
+
+routes.patch('/:id', async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const product = await productModel.updateOneProduct(req.body)
+        res.json({
+            data: { product },
+            message: 'product updated successfully'
+        })
+    } catch (error) {
+        next(error)
+    }
+});
+
+
+routes.delete('/:id', async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const product = await productModel.deleteOneProduct(
+            req.query.id as unknown as number
+        )
+        res.json({
+            data: { ...product },
+            message: 'product is deleted successfully'
+        })
+    } catch (error) {
+        next(error)
+    }
+});
+
 
 
 export default routes;

@@ -34,7 +34,7 @@ const port = 3000;
 
 //test database
 // database.connect().then((clint) => {
-//     return clint.query(`SELECT * FROM users ; `).then((res) => {
+//     return clint.query(`SELECT * FROM order_products ; `).then((res) => {
 //         clint.release();
 //         console.log(res.rows);
 //     }).catch(error => {
@@ -42,17 +42,6 @@ const port = 3000;
 //     })
 // });
 
-
-//add routing path (default endpoint)
-// app.get('/', (req: Request, res: Response) => {
-//     res.send("ffffffffffffffffffff");
-// });
-
-// app.post('/', (req: Request, res: Response) => {
-//     res.json({
-//         message: 'hello from user routes'
-//     });
-// });
 
 
 app.use((_req: Request, res: Response) => {
