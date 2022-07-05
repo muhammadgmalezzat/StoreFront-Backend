@@ -38,7 +38,7 @@ routes.get('/', async (req: Request, res: Response, next: NextFunction) => {
 //get one 
 routes.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const result = await userModel.getOneUser(req.query.id as unknown as number)
+        const result = await userModel.getOneUser(req.params.id as unknown as number)
         res.json({
             data: { result },
             meesage: 'user retrieved successfully '
@@ -69,10 +69,10 @@ routes.delete('/:id', async (
 ) => {
     try {
         const user = await userModel.deleteOneUser(
-            req.query.id as unknown as number
+            req.params.id as unknown as number
         )
         res.json({
-            data: { ...user },
+            data: { user },
             message: 'user is deleted successfully'
         })
     } catch (error) {

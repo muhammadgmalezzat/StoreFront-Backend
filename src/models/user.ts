@@ -18,7 +18,7 @@ class UserModel {
         try {
             //open connection to database
             const connection = await database.connect();
-            const sql = `INSERT INTO users (id,user_name, first_name, last_name, password) values ($1, $2, $3, $4,$5) RETURNING *`;
+            const sql = `INSERT INTO users (id,user_name, first_name, last_name, password) values ($1, $2, $3, $4,$5) RETURNING id ,user_name,first_name, last_name`;
             //run query
             const result = await connection.query(sql, [
                 user.id,
@@ -54,9 +54,9 @@ class UserModel {
     async getOneUser(id: number): Promise<User> {
         try {
             const connection = await database.connect()
-            const sql = `SELECT  id,user_name, first_name, last_name FROM users WHERE id =$1`
+            const sql = `SELECT  id,user_name, first_name, last_name FROM users WHERE id =($1)`
             const result = await connection.query(sql, [id])
-            connection.release()
+            connection.release();
             return result.rows[0];
         } catch (error) {
             throw new Error(
@@ -70,7 +70,7 @@ class UserModel {
     async updateOneUser(user: User): Promise<User> {
     try {
         const connection = await database.connect()
-        const sql = `UPDATE users set ( user_name, first_name, last_name, password) = 
+        const sql = `UPDATE users set (user_name, first_name, last_name, password) = 
         ($1,$2,$3,$4) WHERE id=$5  RETURNING id, user_name, first_name, last_name`
         const result = await connection.query(sql , [
         user.user_name,
@@ -100,7 +100,6 @@ class UserModel {
             `Can not delte user baeause : ${(error as Error).message}`)
         }
     }
-
 
 }
 export default UserModel;

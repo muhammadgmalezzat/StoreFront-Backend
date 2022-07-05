@@ -45,7 +45,7 @@ routes.get('/:id', async (
 ) => {
     try {
         const order = await ordermodel.getOneOrder(
-            req.query.id as unknown as number
+            req.params.id as unknown as number
         )
         res.json({
             data: { order },
@@ -82,7 +82,7 @@ routes.delete('/:id', async (
 ) => {
     try {
         const order = await ordermodel.deleteOneOrder(
-            req.query.id as unknown as number
+            req.params.id as unknown as number
         )
         res.json({
             data: { ...order },

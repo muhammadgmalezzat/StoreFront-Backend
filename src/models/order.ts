@@ -16,9 +16,10 @@ class OrderModel {
         try { 
             //open connection to database
             const connection = await database.connect();
-            const sql = `INSERT INTO orders (user_id) VALUES ($1) RETURNING *;`;
+            const sql = `INSERT INTO orders (id ,user_id) VALUES ($1,$2) RETURNING *;`;
             //run query
             const result = await connection.query(sql, [
+                order.id,
                 order.user_id,
             ]);
             const createorder= result.rows[0];

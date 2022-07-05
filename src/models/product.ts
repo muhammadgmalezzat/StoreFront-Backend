@@ -18,9 +18,10 @@ class ProductModel {
         try {
             //open connection to database
             const connection = await database.connect();
-            const sql = `INSERT INTO products (name, price, category) values ($1, $2, $3) RETURNING *;`;
+            const sql = `INSERT INTO products (id, name, price, category) values ($1, $2, $3 ,$4) RETURNING *;`;
             //run query
             const result = await connection.query(sql, [
+                product.id,
                 product.name,
                 product.price,
                 product.category

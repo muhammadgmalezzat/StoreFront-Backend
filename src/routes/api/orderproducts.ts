@@ -38,7 +38,7 @@ routes.get('/', async (req: Request,res: Response,next: NextFunction) => {
 routes.get('/:id', async (req: Request,res: Response,next: NextFunction) => {
     try {
         const result = await orderProduct.getOneProducts_orders(
-            req.query.id as unknown as number
+            req.params.id as unknown as number
         )
         res.json({
             data: { ...result },
@@ -73,7 +73,7 @@ routes.delete('/:id', async (req: Request,res: Response,next: NextFunction
 ) => {
     try {
         const result = await orderProduct.deletePRoductsOrder(
-            req.query.id as unknown as number
+            req.params.id as unknown as number
         )
         res.json({
             data: { ...result },

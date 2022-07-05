@@ -44,18 +44,23 @@ routes.get('/:id', async (
 ) => {
     try {
         const product = await productModel.getOneProduct(
-            req.query.id as unknown as number
+            req.params.id as unknown as number
         )
-        res.json({
-            data: { ...product },
-            meesage: 'product retrieved successfully '
+        if (product === undefined) {
+            res.json({
+            message: 'product is not found in the list of products '
         })
+        }else {
+            res.json({
+            data: { ...product },
+            message: 'product is showed successfully'
+        })}
     } catch (error) {
         next(error)
     }
 });
 
-
+//update one product
 routes.patch('/:id', async (
     req: Request,
     res: Response,
@@ -63,6 +68,7 @@ routes.patch('/:id', async (
 ) => {
     try {
         const product = await productModel.updateOneProduct(req.body)
+        
         res.json({
             data: { product },
             message: 'product updated successfully'
@@ -80,12 +86,17 @@ routes.delete('/:id', async (
 ) => {
     try {
         const product = await productModel.deleteOneProduct(
-            req.query.id as unknown as number
+            req.params.id as unknown as number
         )
-        res.json({
+        if (product === undefined) {
+            res.json({
+            message: 'product is not deleted '
+        })
+        }else {
+            res.json({
             data: { ...product },
             message: 'product is deleted successfully'
-        })
+        })}
     } catch (error) {
         next(error)
     }

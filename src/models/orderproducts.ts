@@ -1,7 +1,7 @@
 import database from '../database'
 
 export type order_products = {
-    id?: number;
+    id: number;
     order_id: number;
     product_id: number;
     quantity: number;
@@ -14,9 +14,10 @@ class OrderProductModel {
         try {
             //open connection to database
             const connection = await database.connect();
-            const sql = `INSERT INTO order_products (order_id, product_id, quantity) values ($1, $2, $3) RETURNING *;`;
+            const sql = `INSERT INTO order_products (id,order_id, product_id, quantity) values ($1, $2, $3,$4) RETURNING *;`;
             //run query
             const result = await connection.query(sql, [
+                productorder.id,
                 productorder.order_id,
                 productorder.product_id,
                 productorder.quantity
