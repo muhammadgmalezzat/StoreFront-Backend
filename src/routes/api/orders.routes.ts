@@ -1,12 +1,14 @@
 import { Router ,Request,Response , NextFunction} from "express";
 import OrderModel from "../../models/order";
+import validatingToken from "../../middlewares/authinticate"
+
 
 const routes = Router();
 const ordermodel = new OrderModel;
 
 //create endpoint
 
-routes.post('/', async (req: Request, res: Response, next: NextFunction) => {
+routes.post('/',validatingToken,async (req: Request, res: Response, next: NextFunction) => {
     try {
         
         const result = await ordermodel.createOrder(req.body);
@@ -21,7 +23,7 @@ routes.post('/', async (req: Request, res: Response, next: NextFunction) => {
 });
 
 
-routes.get('/', async (
+routes.get('/',validatingToken, async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -38,7 +40,7 @@ routes.get('/', async (
 });
 
 
-routes.get('/:id', async (
+routes.get('/:id',validatingToken, async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -58,7 +60,7 @@ routes.get('/:id', async (
 ); 
 
 
-routes.patch('/:id', async (
+routes.patch('/:id',validatingToken, async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -75,7 +77,7 @@ routes.patch('/:id', async (
 }); 
 
 
-routes.delete('/:id', async (
+routes.delete('/:id',validatingToken, async (
     req: Request,
     res: Response,
     next: NextFunction

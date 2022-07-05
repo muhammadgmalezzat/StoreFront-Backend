@@ -1,5 +1,14 @@
 import database from '../database'
+import config from '../config'
+import bcrypt from 'bcrypt'
 
+
+// here is hashing password function
+const hashingPassword = (password: string) => {
+    const salt = parseInt(config.salt as string, 10);
+    return bcrypt.hashSync(`${password}${config.pepper}`, salt);
+    
+};
 //here user type 
 export type User = {
     id: number ;
@@ -25,7 +34,7 @@ class UserModel {
                 user.user_name,
                 user.first_name,
                 user.last_name,
-                user.password
+                hashingPassword(user.password),
             ]);
             const createUser = result.rows[0];
             //release connection
@@ -76,7 +85,7 @@ class UserModel {
         user.user_name,
         user.first_name,
         user.last_name,
-        user.password,
+        hashingPassword(user.password),
         user.id
         ])
         connection.release()
@@ -98,6 +107,30 @@ class UserModel {
     } catch (error) {
         throw new Error(
             `Can not delte user baeause : ${(error as Error).message}`)
+        }
+    }
+
+    //athentication methode
+    async outhentication(user_name: string, password: string): Promise <User | null> {
+        try {
+            const connection = await database.connect();
+            const sql = `SELECT password FROM users WHERE user_name =$1`;
+            const result = await connection.query(sql, [user_name]);
+            if (result.rows.length) {
+                const { password: hashingPassword } = result.rows[0];
+                const isPasswordValid = bcrypt.compareSync(`${password}${config.pepper}`, hashingPassword);
+                if (isPasswordValid) {
+                    const userInfo = await connection.query(`SELECT id, user_name,first_name,last_name FROM users WHERE user_name = ($1) `, [user_name]);
+                    return userInfo.rows[0];
+                }
+
+            }
+            connection.release();
+            return null;
+
+        } catch (error) {
+        throw new Error(
+            `unable to login : ${(error as Error).message}`)
         }
     }
 

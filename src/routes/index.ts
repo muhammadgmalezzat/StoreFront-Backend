@@ -12,4 +12,6 @@ routes.use('/products', productsRoutes);
 routes.use('/orders', ordersRoutes); 
 //order products
 routes.use('/orderproducts', orderproducts);
+//authentication
+routes.post(`/authenticate`, usersRoutes);
 export default routes;

@@ -1,5 +1,7 @@
 import { Router ,Request, Response, NextFunction } from "express";
 import OrderProductModel    from "../../models/orderproducts";
+import validatingToken from "../../middlewares/authinticate"
+
 
 const orderProduct = new OrderProductModel;
 
@@ -7,7 +9,7 @@ const routes = Router();
 
 
 //create endpoint
-routes.post('/', async (req: Request, res: Response, next: NextFunction) => {
+routes.post('/',validatingToken, async (req: Request, res: Response, next: NextFunction) => {
     try {
         
         const result = await orderProduct.createorderProduct(req.body);
@@ -22,7 +24,7 @@ routes.post('/', async (req: Request, res: Response, next: NextFunction) => {
 });
 
 
-routes.get('/', async (req: Request,res: Response,next: NextFunction) => {
+routes.get('/',validatingToken, async (req: Request,res: Response,next: NextFunction) => {
     try {
         const result = await orderProduct.getAllProducts_orders()
         res.json({
@@ -35,7 +37,7 @@ routes.get('/', async (req: Request,res: Response,next: NextFunction) => {
 });
 
 
-routes.get('/:id', async (req: Request,res: Response,next: NextFunction) => {
+routes.get('/:id',validatingToken, async (req: Request,res: Response,next: NextFunction) => {
     try {
         const result = await orderProduct.getOneProducts_orders(
             req.params.id as unknown as number
@@ -50,7 +52,7 @@ routes.get('/:id', async (req: Request,res: Response,next: NextFunction) => {
 });
 
 
-routes.patch('/:id', async (
+routes.patch('/:id',validatingToken, async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -69,7 +71,7 @@ routes.patch('/:id', async (
 });
 
 
-routes.delete('/:id', async (req: Request,res: Response,next: NextFunction
+routes.delete('/:id',validatingToken, async (req: Request,res: Response,next: NextFunction
 ) => {
     try {
         const result = await orderProduct.deletePRoductsOrder(
