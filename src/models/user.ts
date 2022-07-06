@@ -11,7 +11,7 @@ const hashingPassword = (password: string) => {
 };
 //here user type 
 export type User = {
-    id: number ;
+    id?: number ;
     user_name: string;
     first_name: string;
     last_name: string;
