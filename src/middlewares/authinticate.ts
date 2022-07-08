@@ -14,7 +14,6 @@ const validatingToken =  (req: Request,
     try {
         //get authheader
         const authHeader = req.get('Authorization')
-        console.log(authHeader)
         // check if token is valid before sending request to server 
         if (authHeader)
         {

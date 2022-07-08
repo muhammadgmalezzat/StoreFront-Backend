@@ -18,7 +18,7 @@ routes.post('/',validatingToken, async (req: Request, res: Response, next: NextF
         const result = await userModel.createUser(req.body);
         res.json({
             message: `user created successfully `,
-            data: { result }
+            data: { ...result }
         })
         res.json(result);
     } catch (error) {
@@ -32,7 +32,7 @@ routes.get('/',validatingToken, async (req: Request, res: Response, next: NextFu
     try {
         const result = await userModel.getAllUsers()
         res.json({
-            data: { result },
+            data: { ...result },
             message: 'All Users were retrieved successfully'
         })
     } catch (error) {
@@ -45,7 +45,7 @@ routes.get('/:id',validatingToken, async (req: Request, res: Response, next: Nex
     try {
         const result = await userModel.getOneUser(req.params.id as unknown as number)
         res.json({
-            data: { result },
+            data: { ...result },
             meesage: 'user retrieved successfully '
         })
     } catch (error) {
@@ -56,9 +56,9 @@ routes.get('/:id',validatingToken, async (req: Request, res: Response, next: Nex
 //update one
 routes.patch('/:id',validatingToken, async (req: Request,res: Response,next: NextFunction) => {
     try {
-        const user = await userModel.updateOneUser(req.body)
+        const result = await userModel.updateOneUser(req.body)
         res.json({
-            data: { user },
+            data: { ...result },
             message: 'user updated successfully'
         })
     } catch (error) {
@@ -73,11 +73,11 @@ routes.delete('/:id',validatingToken, async (
     next: NextFunction
 ) => {
     try {
-        const user = await userModel.deleteOneUser(
+        const result = await userModel.deleteOneUser(
             req.params.id as unknown as number
         )
         res.json({
-            data: { user },
+            data: { ...result },
             message: 'user is deleted successfully'
         })
     } catch (error) {

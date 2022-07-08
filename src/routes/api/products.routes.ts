@@ -14,7 +14,7 @@ routes.post('/',validatingToken, async (req: Request, res: Response, next: NextF
         //console.log(req.body.user_name);
         res.json({
             message: `product created successfully `,
-            data: { result }
+            data: { ...result }
         })
         res.json(result);
     } catch (error) {
@@ -72,7 +72,7 @@ routes.patch('/:id',validatingToken, async (
         const product = await productModel.updateOneProduct(req.body)
         
         res.json({
-            data: { product },
+            data: { ...product },
             message: 'product updated successfully'
         })
     } catch (error) {

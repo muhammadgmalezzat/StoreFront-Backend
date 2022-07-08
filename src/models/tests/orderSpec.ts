@@ -19,7 +19,7 @@ const userModel = new UserModel();
 
 
 describe("order Model tests 👽", () => {
-    describe("Test for existing  methods in Product Model 👽", () => {
+    describe("Test for existing  methods in order Model 👽", () => {
         //getAllOrders
         it("should have an getAllOrders method 👽", () => {
             expect(orderModel.getAllOrders).toBeDefined();
@@ -41,14 +41,9 @@ describe("order Model tests 👽", () => {
             expect(orderModel.deleteOneOrder).toBeDefined();
         });
     });
+
     //createUser
-    describe('Testing Logic of Order  Model 👽', () => {
-        const order =
-            {
-                id: 1,
-                user_id: 1,
-            } as Order;
-        
+    describe('Testing Logic of Order  Model 👨‍💻', () => {
         const user =
             {
                 id: 1,
@@ -57,6 +52,13 @@ describe("order Model tests 👽", () => {
                 last_name: 'User',
                 password: 'test123',
             } as User;
+        const order =
+            {
+                id: 1,
+                user_id: 1,
+            } as Order;
+        
+        
 
 
         //beforeAll
@@ -76,11 +78,22 @@ describe("order Model tests 👽", () => {
             await connection.query(sq1l)
             connection.release()
         });
-        //createUser
+
+        it('Create new  order should  return the new order in db ', async () => {
+            const creatOrder = await orderModel.createOrder({
+                ...order,
+                id:2,
+                user_id: 1,
+            })
+            order.id = creatOrder.id
+            expect(creatOrder.id).toBe(order.id)
+            expect(creatOrder.user_id).toBe(order.user_id)
+        })
+        //createorder
 
         it('getAllOrders method should return All Orders in DataBase 👽', async () => {
             const orders = await orderModel.getAllOrders();
-            expect(orders.length).toBe(1);
+            expect(orders.length).toBe(2);
         });
 
         it('getOneOrder method should return test order by ID 👽', async () => {
@@ -93,10 +106,10 @@ describe("order Model tests 👽", () => {
         it('updateOneOrder method should return a order after order has been updated 👽', async () => {
             const updatedorder = await orderModel.updateOneOrder({
                 ...order,
-                id: 1,
+                id: 2,
                 user_id: 1,
             });
-            expect(updatedorder.id).toBe(order.id);
+            expect(updatedorder.id).toBe(2);
             expect(updatedorder.user_id).toBe(1);
         });
 

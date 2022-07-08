@@ -14,7 +14,7 @@ routes.post('/',validatingToken,async (req: Request, res: Response, next: NextFu
         const result = await ordermodel.createOrder(req.body);
         res.json({
             message: `order created successfully `,
-            data: { result }
+            data: { ...result }
         })
         res.json(result);
     } catch (error) {
@@ -31,7 +31,7 @@ routes.get('/',validatingToken, async (
     try {
         const orders = await ordermodel.getAllOrders()
         res.json({
-            data: { orders },
+            data: { ...orders },
             message: 'All order were retrieved successfully'
         })
     } catch (error) {
@@ -50,7 +50,7 @@ routes.get('/:id',validatingToken, async (
             req.params.id as unknown as number
         )
         res.json({
-            data: { order },
+            data: { ...order },
             meesage: 'order retrieved successfully '
         })
     } catch (error) {
