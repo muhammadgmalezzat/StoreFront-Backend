@@ -12,7 +12,7 @@ const routes = Router();
 
 //create endpoint
 
-routes.post('/',validatingToken, async (req: Request, res: Response, next: NextFunction) => {
+routes.post('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
         
         const result = await userModel.createUser(req.body);

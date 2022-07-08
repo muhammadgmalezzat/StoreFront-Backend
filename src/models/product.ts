@@ -40,9 +40,10 @@ class ProductModel {
     //show all product
 
     async getAllProducts(): Promise<Product[]> {
-    try {
+        try {
+        //open connection to database
         const connection = await database.connect()
-      const sql = `SELECT * FROM products`
+        const sql = `SELECT * FROM products`
         const result = await connection.query(sql)
         connection.release()
         return result.rows
@@ -54,7 +55,8 @@ class ProductModel {
 
     //get one 
     async getOneProduct(id: number): Promise<Product> {
-    try {
+        try {
+        //open connection to database
         const connection = await database.connect()
         const sql = `SELECT  id, name, price ,category FROM products WHERE id=$1 `
         const result = await connection.query(sql, [id])
@@ -69,7 +71,8 @@ class ProductModel {
 
     //update one product
     async updateOneProduct(product: Product): Promise<Product> {
-    try {
+        try {
+        //open connection to database
         const connection = await database.connect()
         const sql = `UPDATE products set (name, price , category) = ($1,$2 ,$3) WHERE id=$4 RETURNING *`
         const result = await connection.query(sql , [
@@ -89,7 +92,8 @@ class ProductModel {
 
     //delete  product
     async deleteOneProduct(id: number): Promise<Product> {
-    try {
+        try {
+        //open connection to database
         const connection = await database.connect()
         const sql = `DELETE FROM products WHERE id=($1) RETURNING id, name, price ,category `
         const result = await connection.query(sql, [id])
@@ -99,8 +103,6 @@ class ProductModel {
         throw new Error(
         `Can not delete the product baeause : ${(error as Error).message}`)}
     }
-
-
 
 }
 

@@ -63,7 +63,7 @@ routes.get('/:id', async (
 });
 
 //update one product
-routes.patch('/:id', async (
+routes.patch('/:id',validatingToken, async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -81,7 +81,7 @@ routes.patch('/:id', async (
 });
 
 
-routes.delete('/:id', async (
+routes.delete('/:id',validatingToken, async (
     req: Request,
     res: Response,
     next: NextFunction

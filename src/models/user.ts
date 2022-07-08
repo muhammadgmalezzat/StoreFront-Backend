@@ -1,7 +1,6 @@
 import database from '../database'
 import config from '../config'
 import bcrypt from 'bcrypt'
-import { response } from 'express';
 
 
 // here is hashing password function
@@ -10,6 +9,7 @@ const hashingPassword = (password: string) => {
     return bcrypt.hashSync(`${password}${config.pepper}`, salt);
     
 };
+
 //here user type 
 export type User = {
     id?: number ;
@@ -50,6 +50,7 @@ class UserModel {
     //show all users
     async getAllUsers(): Promise<User[]> {
         try {
+            //open connection to database
             const connection = await database.connect()
             const sql = `SELECT  id, user_name, first_name, last_name FROM users`
             const result = await connection.query(sql)
@@ -112,35 +113,40 @@ class UserModel {
     }
 
     //athentication methode
-    async outhentication(user_name: string, password: string): Promise <User | null> {
-        try {
+    async outhentication(
+    user_name: string,
+    password: string
+    ): Promise<User | null> {
+    try {
+        const connection = await database.connect();
+        const sql = `SELECT password FROM users WHERE user_name=$1`;
+        const result = await connection.query(sql, [user_name]);
+        connection.release();
+        if (result.rows.length) {
+        const { password: hashingPassword } = result.rows[0];
+        const isValid = bcrypt.compareSync(
+            `${password}${config.pepper}`,
+            hashingPassword
+        );
+        if (isValid) {
             const connection = await database.connect();
-            const sql = `SELECT password FROM users WHERE user_name =$1`;
-            const result = await connection.query(sql, [user_name]);
-            if (result.rows.length) {
-                const { password: hashingPassword } = result.rows[0];
-                const isPasswordValid = bcrypt.compareSync(`${password}${config.pepper}`, hashingPassword);
-                if (isPasswordValid) {
-                    const userInfo = await connection.query(`SELECT id, user_name,first_name,last_name FROM users WHERE user_name = ($1) `, [user_name]);
-                    return userInfo.rows[0];
-                }
-                else {
-                    connection.release();
-                    response.send("outhentication failed");
-                return null;
-                }
-            }else {
-                connection.release();
-                response.send("outhentication failed");
-                return null;
-                }
-            
-
-        } catch (error) {
-        throw new Error(
-            `unable to login : ${(error as Error).message}`)
+            const dataUser = await connection.query(
+            `
+            SELECT id, user_name, first_name, last_name FROM users where user_name=$1`,
+            [user_name]
+            );
+            connection.release();
+            return dataUser.rows[0];
         }
+        }
+        return null;
+    } catch (error) {
+        throw new Error(
+        `Can not authenticate user baeause : ${(error as Error).message}`
+    );
     }
+    }
+
 
 }
 export default UserModel;

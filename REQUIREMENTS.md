@@ -1,63 +1,17 @@
-# Storefront Backend Project
+# API Requirements
 
-## Getting Started
+The company stakeholders want to create an online storefront to showcase their great product ideas. Users need to be able to browse an index of all products, see the specifics of a single product, and add products to an order that they can view in a cart page. You have been tasked with building the API that will support this application, and your coworker is building the frontend.
 
-This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `npm install` in your terminal at the project root.
-
-#### backend Technologies
-
-    - Node.js
-    - Typescript
-    - express
-    - SQL
-
-#### tools
-
-    - ESLint
-    - Nodemon
-    - Jasmine
-    - Prettier
-    - postgresql
-    - postman 
-
-## Steps to start
-
-### Scripts
-
-#### Installing
-
-    npm install
-
-#### Build
-
-    npm run build
-
-### EsLint
-
-    npm run lint
-
-### Prettier :
-
-    npm run format
-
-### Run unit tests
-
-    npm run test
-
-### Start server
-
-    npm run start
+These are the notes from a meeting with the frontend developer that describe what endpoints the API needs to supply, as well as data shapes the frontend and backend have agreed meet the requirements of the application.
 
 ## API Endpoints
 
 #### Products
-
-- CREATE : ` POST '/api/products/' (token)`
-
-  - to create a new product
+- CREATE : ` POST  '/api/products/' (token)`
+    - to create a new product
     > [`localhost:3000/api/products/`](http://localhost:3000/api/products/)
 
-  Json Data
+    Json Data
 
         {
             "id": "1",
@@ -66,24 +20,22 @@ This repo contains a basic Node and Express app to get you started in constructi
             "category":"electronics"
         }
 
-- Index : `GET '/api/products/'`
 
-      - to view the list of products
-      > [`localhost:3000/api/products/`](http://localhost:3000/api/products/
-
-  )
+- Index : ` GET  '/api/products/' `
+    
+    - to view the list of products
+    > [`localhost:3000/api/products/`](http://localhost:3000/api/products/
+)
 
 - Show : ` GET '/api/products/:id`
-
-  - to view one product by its ID
+    - to view one product by its ID
     > [`localhost:3000/api/products/1`](http://localhost:3000/api/products/1)
 
 - UPDATE : ` PATCH '/api/products' (token)`
-
-  - to update the list of products
+    - to update the list of products
     > [`localhost:3000/api/products/1`](http://localhost:3000/api/products/1)
 
-  Json Data
+    Json Data
 
         {
             "id": "1",
@@ -92,15 +44,18 @@ This repo contains a basic Node and Express app to get you started in constructi
             "category":"electronics2"
         }
 
-- Delete : ` DELETE '/api/products' (token)`
-  - to delete one product from list of products by id
-    > [`localhost:3000/api/products/1`](http://localhost:3000/api/products/1)
+- Delete : ` DELETE '/api/products' (token)` 
+    - to delete one product from list of products by id 
+     > [`localhost:3000/api/products/1`](http://localhost:3000/api/products/1)
+
+
+
 
 #### Users
 
 - CREATE : ` POST '/api/users/' (token)`
 
-  - to create a new user
+    - to create a new user 
     > [`localhost:3000/api/users/`](http://localhost:3000/api/users/)
 
   Json Data
@@ -115,8 +70,9 @@ This repo contains a basic Node and Express app to get you started in constructi
 
 - Index : `GET '/api/users/'`
 
-  - to view the list of users
+    - to view the list of users
     > [`localhost:3000/api/users/`](http://localhost:3000/api/users/)
+
 
 - Show : ` GET '/api/users/:id`
 
@@ -142,7 +98,8 @@ This repo contains a basic Node and Express app to get you started in constructi
   - to delete one user from list of users by id
     > [`localhost:3000/api/users/1`](http://localhost:3000/api/users/1)
 
-#### orders
+
+#### orders 
 
 - CREATE : ` POST '/api/orders/' (token)`
 
@@ -182,7 +139,9 @@ This repo contains a basic Node and Express app to get you started in constructi
   - to delete one order from list of orders by id
     > [`localhost:3000/api/orders/1`](http://localhost:3000/api/orders/1)
 
+
 #### Product order
+
 
 - CREATE : ` POST '/api/orderproducts/' (token)`
 
@@ -226,6 +185,7 @@ This repo contains a basic Node and Express app to get you started in constructi
   - to delete one order-product from list of order-products by id
     > [`localhost:3000/api/orderproducts/1`](http://localhost:3000/api/orderproducts/1)
 
+
 ## Data Shapes
 
 #### Product
@@ -251,9 +211,7 @@ This repo contains a basic Node and Express app to get you started in constructi
 #### Product order
 
     - id
-    - order_id
+    - order_id 
     - product_id (id of each product in the order )
     - quantity (quantity of each product in the order)
-
-
 

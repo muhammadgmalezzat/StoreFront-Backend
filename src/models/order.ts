@@ -37,7 +37,8 @@ class OrderModel {
 
     //get all orders
     async getAllOrders(): Promise<Order[]> {
-    try {
+        try {
+        //open connection to database
         const connection = await database.connect()
       const sql = `SELECT * FROM orders`
         const result = await connection.query(sql)
@@ -51,7 +52,8 @@ class OrderModel {
 
     //get one order
     async getOneOrder(id: number): Promise<Order> {
-    try {
+        try {
+        //open connection to database
         const connection = await database.connect()
         const sql = `SELECT user_id, id FROM orders  WHERE id=($1)`
         const result = await connection.query(sql, [id])
@@ -67,7 +69,8 @@ class OrderModel {
     }
     //update one order
     async updateOneOrder(order: Order): Promise<Order> {
-    try {
+        try {
+        //open connection to database
         const connection = await database.connect()
         const sql = `UPDATE orders set user_id = $1 WHERE id=$2  RETURNING *`
         const result = await connection.query(sql , [
@@ -83,7 +86,8 @@ class OrderModel {
 
     //delete one order
     async deleteOneOrder(id: number): Promise<Order> {
-    try {
+        try {
+        //open connection to database
         const connection = await database.connect()
       const sql = `DELETE FROM orders WHERE id=$1 RETURNING *`
         const result = await connection.query(sql, [id])
