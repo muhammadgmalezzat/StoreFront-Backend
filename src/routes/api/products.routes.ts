@@ -1,13 +1,13 @@
 import ProductModel from "../../models/product";
 import { Router,Request, Response, NextFunction } from "express";
-import validatingToken from "../../middlewares/authinticate"
+import validatingToken from "../../middlewares/authorization"
 
 
 const productModel = new ProductModel();
 const routes = Router();
 
 //create product
-routes.post('/',validatingToken, async (req: Request, res: Response, next: NextFunction) => {
+routes.post('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
         
         const result = await productModel.createProduct(req.body);
@@ -22,7 +22,7 @@ routes.post('/',validatingToken, async (req: Request, res: Response, next: NextF
     }
 });
 //get all products
-routes.get('/',validatingToken, async (
+routes.get('/', async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -39,7 +39,7 @@ routes.get('/',validatingToken, async (
 });
 
 //get one product
-routes.get('/:id',validatingToken, async (
+routes.get('/:id', async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -63,7 +63,7 @@ routes.get('/:id',validatingToken, async (
 });
 
 //update one product
-routes.patch('/:id',validatingToken, async (
+routes.patch('/:id', async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -81,7 +81,7 @@ routes.patch('/:id',validatingToken, async (
 });
 
 
-routes.delete('/:id',validatingToken, async (
+routes.delete('/:id', async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -103,6 +103,7 @@ routes.delete('/:id',validatingToken, async (
         next(error)
     }
 });
+
 
 
 

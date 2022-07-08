@@ -1,6 +1,6 @@
 import { Router ,Request,Response , NextFunction} from "express";
 import OrderModel from "../../models/order";
-import validatingToken from "../../middlewares/authinticate"
+import validatingToken from "../../middlewares/authorization"
 
 
 const routes = Router();

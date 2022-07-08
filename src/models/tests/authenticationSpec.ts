@@ -34,7 +34,7 @@ describe("athentication model", () => {
         });
         //return authenticatedUser testing 
         it('Authentication return authenticated user  ', async () => {
-            const authenticatedUser = await userModel.outhentication(user.user_name, user.password as string);
+            const authenticatedUser = await userModel.outhentication(user.user_name as string, user.password as string);
             //expected user testing
             expect(authenticatedUser?.id).toBe(user.id);
             expect(authenticatedUser?.user_name).toBe(user.user_name);
@@ -45,7 +45,7 @@ describe("athentication model", () => {
         //wrong password
         it('Authentication failed then  return null , password is wrong', async () => {
             const authenticatedUser = await userModel.outhentication(
-                'mohamed',
+                'testuser',
                 'f'
             );
             expect(authenticatedUser).toBe(null);

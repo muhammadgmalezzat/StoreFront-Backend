@@ -1,6 +1,7 @@
 import database from '../database'
 import config from '../config'
 import bcrypt from 'bcrypt'
+import { response } from 'express';
 
 
 // here is hashing password function
@@ -123,10 +124,17 @@ class UserModel {
                     const userInfo = await connection.query(`SELECT id, user_name,first_name,last_name FROM users WHERE user_name = ($1) `, [user_name]);
                     return userInfo.rows[0];
                 }
-
-            }
-            connection.release();
-            return null;
+                else {
+                    connection.release();
+                    response.send("outhentication failed");
+                return null;
+                }
+            }else {
+                connection.release();
+                response.send("outhentication failed");
+                return null;
+                }
+            
 
         } catch (error) {
         throw new Error(

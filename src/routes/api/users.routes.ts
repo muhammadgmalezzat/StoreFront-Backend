@@ -2,7 +2,7 @@ import { Router ,Request, Response, NextFunction } from "express";
 import UserModel from "../../models/user";
 import config from '../../config'
 import jwt from "jsonwebtoken"
-import validatingToken from "../../middlewares/authinticate"
+import validatingToken from "../../middlewares/authorization"
 
 
 

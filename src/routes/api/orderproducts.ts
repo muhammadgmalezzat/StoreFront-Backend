@@ -1,6 +1,6 @@
 import { Router ,Request, Response, NextFunction } from "express";
 import OrderProductModel    from "../../models/orderproducts";
-import validatingToken from "../../middlewares/authinticate"
+import validatingToken from "../../middlewares/authorization"
 
 
 const orderProduct = new OrderProductModel;
