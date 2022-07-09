@@ -90,11 +90,11 @@ routes.post(`/authenticate`,async (req: Request,res: Response,next: NextFunction
     try {
         const { user_name, password } = req.body;
         const user = await userModel.outhentication(user_name, password);
-        const token = jwt.sign({ user }, config.token as string);
+        const token = jwt.sign({ user }, config.token as unknown as string);
     if (!user) {
         return res.status(401).json({
             status: "error",
-        message: 'user name and password not match'
+            message: 'user name and password not match'
         })
     }
     res.json({
@@ -103,7 +103,7 @@ routes.post(`/authenticate`,async (req: Request,res: Response,next: NextFunction
         message:'user is authenticated successfully and the token is also provided '
     })
     } catch (error) {
-    next(error)
+        return next(error);
     }
 } );
 

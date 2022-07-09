@@ -9,7 +9,6 @@ const hashingPassword = (password: string) => {
     return bcrypt.hashSync(`${password}${config.pepper}`, salt);
     
 };
-
 //here user type 
 export type User = {
     id?: number ;
@@ -50,7 +49,6 @@ class UserModel {
     //show all users
     async getAllUsers(): Promise<User[]> {
         try {
-            //open connection to database
             const connection = await database.connect()
             const sql = `SELECT  id, user_name, first_name, last_name FROM users`
             const result = await connection.query(sql)
@@ -129,24 +127,22 @@ class UserModel {
             hashingPassword
         );
         if (isValid) {
-            const connection = await database.connect();
-            const dataUser = await connection.query(
+        const connection = await database.connect();
+        const dataUser = await connection.query(
             `
-            SELECT id, user_name, first_name, last_name FROM users where user_name=$1`,
+        SELECT id, user_name, first_name, last_name FROM users where user_name=$1`,
             [user_name]
-            );
-            connection.release();
-            return dataUser.rows[0];
+        );
+        connection.release();
+        return dataUser.rows[0];
         }
-        }
-        return null;
+    }
+    return null;
     } catch (error) {
-        throw new Error(
+    throw new Error(
         `Can not authenticate user baeause : ${(error as Error).message}`
     );
     }
     }
-
-
 }
 export default UserModel;

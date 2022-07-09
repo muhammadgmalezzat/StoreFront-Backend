@@ -40,7 +40,6 @@ describe('Testing the logic of the Orders routes', () => {
     beforeAll(async () => {
         const createUser = await userModel.createUser(user)
         user.id = createUser.id
-        //order.user_id = createUser.id
         const creatOrder = await orderModel.createOrder(order)
         order.id = creatOrder.id
     })
