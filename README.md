@@ -48,183 +48,58 @@ This repo contains a basic Node and Express app to get you started in constructi
 
     npm run start
 
-## API Endpoints
+### Packages
 
-#### Products
+Here are some of packages that were installed.
 
-- CREATE : ` POST '/api/products/' (token)`
+#### express
 
-  - to create a new product
-    > [`localhost:3000/api/products/`](http://localhost:3000/api/products/)
+`npm i express`
+`npm i --save-dev @types/express`
 
-  Json Data
+#### typescript
 
-        {
-            "id": "1",
-            "name":"lap",
-            "price":"3000",
-            "category":"electronics"
-        }
+`npm i --save-dev typescript`
 
-- Index : `GET '/api/products/'`
+#### db-migrate
 
-      - to view the list of products
-      > [`localhost:3000/api/products/`](http://localhost:3000/api/products/
+`npm install -g db-migrate`
 
-  )
+#### rimraf
 
-- Show : ` GET '/api/products/:id`
+`npm install --save rimraf`
 
-  - to view one product by its ID
-    > [`localhost:3000/api/products/1`](http://localhost:3000/api/products/1)
+#### bcrypt
 
-- UPDATE : ` PATCH '/api/products' (token)`
+`npm i bcrypt`
+`npm i --save-dev @types/bcrypt`
 
-  - to update the list of products
-    > [`localhost:3000/api/products/1`](http://localhost:3000/api/products/1)
+#### morgan
 
-  Json Data
+`npm install --save morgan`
+`npm i --save-dev @types/morgan`
 
-        {
-            "id": "1",
-            "name":"lap2",
-            "price":"3800",
-            "category":"electronics2"
-        }
+#### jsonwebtoken
 
-- Delete : ` DELETE '/api/products' (token)`
-  - to delete one product from list of products by id
-    > [`localhost:3000/api/products/1`](http://localhost:3000/api/products/1)
+`npm install jsonwebtoken `
+`npm i --save-dev @types/jsonwebtoken`
 
-#### Users
+#### dot-env
 
-- CREATE : ` POST '/api/users/' (token)`
+`npm install dotenv --save`
 
-  - to create a new user
-    > [`localhost:3000/api/users/`](http://localhost:3000/api/users/)
+#### jasmine
 
-  Json Data
+`npm install jasmine @types/jasmine ts-node --save-dev`
 
-        {
-            "id":"1",
-            "user_name":"mohamed",
-            "first_name":"mohamed",
-            "last_name":"gmal",
-            password:"password",
-        }
+#### supertest
 
-- Index : `GET '/api/users/'`
+`npm i supertest`
+`npm i --save-dev @types/supertest`
 
-  - to view the list of users
-    > [`localhost:3000/api/users/`](http://localhost:3000/api/users/)
+## Endpoint Access
 
-- Show : ` GET '/api/users/:id`
-
-  - to view one user by its ID
-    > [`localhost:3000/api/users/1`](http://localhost:3000/api/users/1)
-
-- UPDATE : ` PATCH '/api/users' (token)`
-
-  - to update the list of users
-    > [`localhost:3000/api/users/1`](http://localhost:3000/api/users/1)
-
-  Json Data
-
-        {
-            "id": "1",
-            "user_name":"mohamed2",
-            "first_name":"mohamed2",
-            "last_name":"gmal2",
-            password:"password",
-        }
-
-- Delete : ` DELETE '/api/users' (token)`
-  - to delete one user from list of users by id
-    > [`localhost:3000/api/users/1`](http://localhost:3000/api/users/1)
-
-#### orders
-
-- CREATE : ` POST '/api/orders/' (token)`
-
-  - to create a new order
-    > [`localhost:3000/api/orders/`](http://localhost:3000/api/orders/)
-
-  Json Data
-
-        {
-            "id":"1",
-            "user_id":1, // make sure that user with id 1 exists
-        }
-
-- Index : `GET '/api/orders/'`
-
-  - to view the list of orders
-    > [`localhost:3000/api/orders/`](http://localhost:3000/api/orders/)
-
-- Show : ` GET '/api/orders/:id`
-
-  - to view one order by its ID
-    > [`localhost:3000/api/orders/1`](http://localhost:3000/api/orders/1)
-
-- UPDATE : ` PATCH '/api/orders' (token)`
-
-  - to update the list of orders
-    > [`localhost:3000/api/orders/1`](http://localhost:3000/api/users/1)
-
-  Json Data
-
-        {
-            "id": "1",
-            "user_id":2,
-        }
-
-- Delete : ` DELETE '/api/orders' (token)`
-  - to delete one order from list of orders by id
-    > [`localhost:3000/api/orders/1`](http://localhost:3000/api/orders/1)
-
-#### Product order
-
-- CREATE : ` POST '/api/orderproducts/' (token)`
-
-  - to create a new orderproducts
-    > [`localhost:3000/api/orderproducts/`](http://localhost:3000/api/orderproducts/)
-
-  Json Data
-
-        {
-            "id":"1",
-            "order_id": "2",// make sure that order with id 2 exists
-            "product_id":"1" ,// make sure that product with id 1 exists
-            "quantity": "7",
-        }
-
-- Index : `GET '/api/orderproducts/'`
-
-  - to view the list of orderproducts
-    > [`localhost:3000/api/orderproducts/`](http://localhost:3000/api/orderproducts/)
-
-- Show : ` GET '/api/orderproducts/:id`
-
-  - to view one orderproducts by its ID
-    > [`localhost:3000/api/orderproducts/1`](http://localhost:3000/api/orderproducts/1)
-
-- UPDATE : ` PATCH '/api/orderproducts' (token)`
-
-  - to update the list of orderproducts
-    > [`localhost:3000/api/orderproducts/1`](http://localhost:3000/api/orderproducts/1)
-
-  Json Data
-
-        {
-            "id":"1",
-            "order_id": "3",// make sure that order with id 3 exists
-            "product_id":"3" ,// make sure that product with id 3 exists
-            "quantity": "7",
-        }
-
-- Delete : ` DELETE '/api/orderproducts' (token)`
-  - to delete one order-product from list of order-products by id
-    > [`localhost:3000/api/orderproducts/1`](http://localhost:3000/api/orderproducts/1)
+All endpoints are described in the [REQUIREMENT.md](REQUIREMENTS.md) file.
 
 ## Data Shapes
 
@@ -255,9 +130,22 @@ This repo contains a basic Node and Express app to get you started in constructi
     - product_id (id of each product in the order )
     - quantity (quantity of each product in the order)
 
+### Running Ports
+
+After start up, the server will start on port `3000` and the database on port `5432`
 
 
-.env file
+## Token and Authentication
+
+Tokens are passed along with the http header as
+
+`"Authorization " "Bearer <token>"`
+
+
+
+## Enviromental Variables Set up
+
+Bellow are the environmental variables that needs to be set in a `.env` file. This is the default setting that I used for development, but you can change it to what works for you.
 
 PORT = 3000
 
@@ -272,3 +160,19 @@ POSTGRES_PASSWORD=gemy200@
 BCRYPT_PASSWORD=crypted-password-for-data-base
 SALT_ROUNDS=10
 TOKEN_SECRET=secure-your-token
+ 
+## Set up Database
+
+### Create Databases
+
+We should create the dev and test database.
+
+- connect to the default postgres database as the server's root user `psql -U postgres`
+- In psql run the following to create a user
+  - `CREATE USER postgres WITH PASSWORD 'gemy200@';`
+- In psql run the following to create the dev and test database
+  - `CREATE DATABASE store_dev;`
+  - `CREATE DATABASE store_test;`
+- Connect to the databases and grant all privileges
+  - `\c store_dev`
+  - `\c store_test`
