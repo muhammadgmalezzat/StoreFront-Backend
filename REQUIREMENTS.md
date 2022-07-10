@@ -190,28 +190,36 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 #### Product
 
-    - id
-    - name
-    - price
-    - category
+    - id : number (SERIAL)
+    - name : string (VARCHAR(150)) NOT NULL
+    - price : VARCHAR(100) NOT NULL
+    - category : string (VARCHAR(50))
+
 
 #### User
 
-    - id
-    - user_name
-    - first_Name
-    - last_Name
-    - password
+    - id : SERIAL PRIMARY KEY 
+    - user_name : VARCHAR(50) NOT NULL
+    - first_name : VARCHAR(50) NOT NULL
+    - last_name : VARCHAR(50) NOT NULL
+    - password : VARCHAR(255) NOT NULL
+
+
 
 #### Orders
 
-    - id
-    - user_id
+    - id : SERIAL PRIMARY KEY 
+    - user_id : INTEGER 
+    - FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
+
 
 #### Product order
 
-    - id
-    - order_id 
-    - product_id (id of each product in the order )
-    - quantity (quantity of each product in the order)
+    - id : SERIAL PRIMARY KEY 
+    - order_id : INTEGER
+    - product_id : INTEGER 
+    - quantity : INTEGER NOT NULL
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE ON UPDATE CASCADE
+
 
