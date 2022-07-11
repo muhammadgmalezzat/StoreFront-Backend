@@ -143,24 +143,6 @@ Tokens are passed along with the http header as
 
 
 
-## Enviromental Variables Set up
-
-Bellow are the environmental variables that needs to be set in a `.env` file. This is the default setting that I used for development, but you can change it to what works for you.
-
-PORT = 3000
-
-POSTGRES_HOST = localhost
-POSTGRES_PORT = 5432
-NODE_ENV = dev
-POSTGRES_DB = store_dev
-POSTGRES_TEST_DB = store_test
-
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=gemy200@
-BCRYPT_PASSWORD=crypted-password-for-data-base
-SALT_ROUNDS=10
-TOKEN_SECRET=secure-your-token
- 
 ## Set up Database
 
 ### Create Databases
